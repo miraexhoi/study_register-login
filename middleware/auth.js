@@ -1,10 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('./models/User.js');
+const mysql = require('mysql2');
+// const User = require('./models/User.js');
 
 const app = express();
-const port = 3000;
+const port = 4000;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -15,7 +18,7 @@ const connection = mysql.createConnection({
   user:"root",
   password:"1234",
   database:"users",
-  port:3000
+  port:4000
 });
 
 // 권한 인증 미들웨어
@@ -31,6 +34,8 @@ const auth = (req, res, next) => {
     next();
   });
 };
+
+module.exports = auth;
 
 // 예시로 루트 엔드포인트를 보호하는 방법
 app.get('/', auth, (req, res) => {

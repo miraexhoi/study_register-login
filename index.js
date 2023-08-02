@@ -6,7 +6,26 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2');
 const config = require('./config/key');
-const { auth } = require('./middleware/auth');
+// const { auth } = require('./middleware/auth');
+const auth = require('./middleware/auth.js');
+
+// 유저 테이블 스키마 & 모델 
+const createUsersTableQuery = `
+  CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    lastname VARCHAR(50),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    role INT DEFAULT 0,
+    image VARCHAR(255),
+    token VARCHAR(255),
+    tokenExp INT
+  )
+`;
+
+
+// 이후에 auth 함수를 사용하는 라우트 등을 정의할 수 있습니다.
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -17,7 +36,7 @@ const connection = mysql.createConnection({
     user:"root",
     password:"1234",
     database:"users",
-    port:3000
+    port:4000
   });
 
 connection.connect((err) => {
@@ -78,6 +97,20 @@ const User = {
       callback(null, isMatch);
     });
   },
+
+  findOne: function (condition, callback) {
+    const getUserQuery = `
+      SELECT * FROM users WHERE email = ?
+    `;
+  
+    connection.query(getUserQuery, [condition.email], (err, results) => {
+      if (err) return callback(err);
+      if (results.length === 0) return callback(null, null);
+  
+      const user = results[0];
+      return callback(null, user);
+    });
+  }  
 };
 
 app.post('/api/users/login', (req, res) => {
@@ -133,7 +166,7 @@ app.post('/api/users/login', (req, res) => {
     );
   });
   
-  const port = 3000;
-  //3000번 포트에서 연결을 청취하고, 연결됬을 시 콜백함수를 실행
+  const port = 4000;
+  //4000번 포트에서 연결을 청취하고, 연결됬을 시 콜백함수를 실행
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
   

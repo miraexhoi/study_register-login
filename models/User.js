@@ -5,7 +5,7 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const port = 3000;
+const port = 4000;
 
 // MySQL 데이터베이스 연결 설정
 const connection = mysql.createConnection({
@@ -13,11 +13,11 @@ const connection = mysql.createConnection({
   user:"root",
   password:"1234",
   database:"users",
-  port:3000
+  port:4000
 });
 
 // 유저 테이블 스키마 & 모델 
-const userSchema = `
+const createUsersTableQuery = `
   CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
@@ -31,7 +31,7 @@ const userSchema = `
   )
 `;
 
-connection.query(userSchema, (err) => {
+connection.query(createUsersTableQuery, (err) => {
   if (err) throw err;
   console.log('Users table created or already exists');
 });
