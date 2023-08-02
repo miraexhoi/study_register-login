@@ -53,6 +53,7 @@ const User = {
     });
   },
 
+  // WT 토큰을 인자로 받아 해당 토큰을 가진 사용자를 찾는 메서드
   findByToken: function (token, callback) {
     jwt.verify(token, 'secretToken', function (err, decoded) {
       if (err) return callback(err);
