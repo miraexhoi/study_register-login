@@ -36,7 +36,7 @@ const connection = mysql.createConnection({
     user:"root",
     password:"1234",
     database:"users",
-    port:4000
+    port:7000
   });
 
 connection.connect((err) => {
@@ -166,7 +166,7 @@ app.post('/api/users/login', (req, res) => {
     );
   });
   
-  const port = 4000;
-  //4000번 포트에서 연결을 청취하고, 연결됬을 시 콜백함수를 실행
+  const port = 7000;
+  //7000번 포트에서 연결을 청취하고, 연결됬을 시 콜백함수를 실행
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
   

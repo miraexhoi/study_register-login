@@ -7,7 +7,7 @@ const mysql = require('mysql2');
 // const User = require('./models/User.js');
 
 const app = express();
-const port = 4000;
+const port = 7000;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
   user:"root",
   password:"1234",
   database:"users",
-  port:4000
+  port:7000
 });
 
 // 권한 인증 미들웨어

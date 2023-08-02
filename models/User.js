@@ -5,7 +5,7 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const port = 4000;
+const port = 7000;
 
 // MySQL 데이터베이스 연결 설정
 const connection = mysql.createConnection({
@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
   user:"root",
   password:"1234",
   database:"users",
-  port:4000
+  port:7000
 });
 
 // 유저 테이블 스키마 & 모델 
