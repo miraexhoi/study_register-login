@@ -18,8 +18,6 @@ const connection = mysql.createConnection({
   port:3000
 });
 
-// User 모델과 userSchema 등의 코드는 앞에서 만들어진 코드를 그대로 사용
-
 // 권한 인증 미들웨어
 const auth = (req, res, next) => {
   let token = req.cookies.x_auth;
