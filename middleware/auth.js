@@ -36,8 +36,9 @@ const auth = (req, res, next) => {
 // 예시로 루트 엔드포인트를 보호하는 방법
 app.get('/', auth, (req, res) => {
   // req.user와 req.token을 사용할 수 있습니다.
-  res.send('인증되었습니다.');
+  res.send('Authentication completed.');
 });
 
 app.listen(port, () => {
-  console.log(`서버가 http://localhost:${port} 에서 실행 중입니다
+  console.log(`Server is running on http://localhost:${port}`);
+});
