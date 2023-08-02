@@ -11,13 +11,14 @@ app.use(cookieParser());
 
 // MySQL 연결 설정
 const connection = mysql.createConnection({
-  host: 'your_mysql_host',
-  user: 'your_mysql_user',
-  password: 'your_mysql_password',
-  database: 'your_database_name',
+  host:"127.0.0.1",
+  user:"root",
+  password:"1234",
+  database:"",
+  port:3000
 });
 
-// User 모델과 userSchema 등의 코드는 앞에서 만들어진 코드를 그대로 사용합니다.
+// User 모델과 userSchema 등의 코드는 앞에서 만들어진 코드를 그대로 사용
 
 // 권한 인증 미들웨어
 const auth = (req, res, next) => {
@@ -36,7 +37,7 @@ const auth = (req, res, next) => {
 // 예시로 루트 엔드포인트를 보호하는 방법
 app.get('/', auth, (req, res) => {
   // req.user와 req.token을 사용할 수 있습니다.
-  res.send('Authentication completed.');
+  res.send('Authentication complete.');
 });
 
 app.listen(port, () => {
