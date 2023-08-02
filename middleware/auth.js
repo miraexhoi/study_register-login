@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const User = require('./models/User');
+const User = require('./models/User.js');
 
 const app = express();
 const port = 3000;
